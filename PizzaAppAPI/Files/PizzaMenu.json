@@ -1,0 +1,67 @@
+{
+    "Toppings":
+    [
+        {
+            "Type":"Chicken BBQ",
+            "Price":15
+        },
+        {
+            "Type":"Shrimps",
+            "Price":30
+        },
+        {
+            "Type":"Pepperoni",
+            "Price":12.5
+        },
+        {
+            "Type":"Vegetables",
+            "Price":8.4
+        },
+        {
+            "Type":"Meat",
+            "Price":17.5
+        }
+
+    ],
+    "Sizes":
+    [
+       {
+           "Type":"Small",
+           "Price":10
+       } ,
+       {
+        "Type":"Medium",
+        "Price":15
+    } , {
+        "Type":"Large",
+        "Price":20
+    } 
+    ]
+            
+    ,
+    "Sides":
+    [
+        {
+            "Type":"Fries",
+            "Price":5.5
+        },
+        {
+            "Type":"None",
+            "Price":0.0
+        },
+        {
+            "Type":"Cookie",
+            "Price":3.5
+        },        
+        {
+            "Type":"Salad",
+            "Price":9.8
+        },
+        {
+            "Type":"Garlic Bread",
+            "Price":7.7
+        }
+    ]
+
+      
+  }
