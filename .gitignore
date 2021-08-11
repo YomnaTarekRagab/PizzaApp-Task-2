@@ -7,3 +7,4 @@ PizzaAppConsole/obj
 *.pdb
 *.cache
 *.txt
+PizzaAppAPI/bin/Debug/net6.0/PizzaAppAPI.dll
