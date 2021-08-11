@@ -54,6 +54,7 @@ namespace PizzaApp
                 }
             }
         }
+        
         static int WelcomePage()
         {
             AnsiConsole.Render(
@@ -64,8 +65,8 @@ namespace PizzaApp
             AnsiConsole.Render(new Markup("[bold yellow] Enter the number of pizzas:[/] \n"));
             Int32.TryParse(Console.ReadLine(), out int n);
             return n;
-            
         }
+        
         static void ConsoleFn(PizzaModel pizzaMenu, ref TypeXPrice prefTop, ref TypeXPrice prefSize, ref TypeXPrice prefSide)
             {
                 string formatTitle = "[bold green]Available toppings[/] \n";
