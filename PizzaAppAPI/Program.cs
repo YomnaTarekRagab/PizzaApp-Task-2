@@ -15,7 +15,6 @@ if (app.Environment.IsDevelopment())
 app.MapGet("/components", async () =>
 {
    var t1 = await ReadOrdersList("Files/PizzaMenu.json");
-   
    return t1;
 });
 app.MapPost("/createPizza", async ([FromBody] Order recievedOrder) =>
