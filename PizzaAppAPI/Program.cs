@@ -27,7 +27,7 @@ app.MapPost("/createPizza", async ([FromBody] Order recievedOrder) =>
         IncludeFields = true
     };
     var orderJson = System.Text.Json.JsonSerializer.Serialize(recievedOrder, options);
-    await File.WriteAllTextAsync(path, orderJson);
+    await File.AppendAllTextAsync(path, orderJson);
     return new OkObjectResult(recievedOrder);
 });
 

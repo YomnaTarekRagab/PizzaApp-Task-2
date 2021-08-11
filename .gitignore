@@ -2,3 +2,9 @@ PizzaAppAPI/bin
 PizzaAppAPI/obj
 PizzaAppConsole/bin
 PizzaAppConsole/obj
+*.dll
+*.dll
+*.pdb
+*.cache
+*.txt
+PizzaAppAPI/bin/Debug/net6.0/PizzaAppAPI.dll
