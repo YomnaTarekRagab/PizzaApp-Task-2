@@ -12,11 +12,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+
 app.MapGet("/components", async () =>
 {
    var t1 = await ReadOrdersList("Files/PizzaMenu.json");
    return t1;
 });
+
 app.MapPost("/createPizza", async ([FromBody] Order recievedOrder) =>
 {
     recievedOrder.OrderPrice();
@@ -36,6 +38,6 @@ static async Task<string> ReadOrdersList(string fileName)
     string path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
     string jsonString = await File.ReadAllTextAsync(path);
     return jsonString;
-
 }
+
 await app.RunAsync();
