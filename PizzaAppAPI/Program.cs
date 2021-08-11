@@ -15,6 +15,7 @@ if (app.Environment.IsDevelopment())
 app.MapGet("/components", async () =>
 {
    var t1 = await ReadOrdersList("Files/PizzaMenu.json");
+   
    return t1;
 });
 app.MapPost("/createPizza", async ([FromBody] Order recievedOrder) =>
@@ -27,7 +28,7 @@ app.MapPost("/createPizza", async ([FromBody] Order recievedOrder) =>
         IncludeFields = true
     };
     var orderJson = System.Text.Json.JsonSerializer.Serialize(recievedOrder, options);
-    await File.WriteAllTextAsync(path, orderJson);
+    await File.AppendAllTextAsync(path, orderJson);
     return new OkObjectResult(recievedOrder);
 });
 
