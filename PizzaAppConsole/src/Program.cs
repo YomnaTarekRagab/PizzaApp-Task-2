@@ -16,19 +16,20 @@ namespace PizzaApp
             var baseUrl = "http://localhost:5000/";
             var htppClient = new HttpClient();
             bool begin = true;
-            while(begin){
-                int  numberOfPizzas = WelcomePage();
-                int counter =1;
+            while (begin)
+            {
+                int numberOfPizzas = WelcomePage();
+                int counter = 1;
                 var prefOrder = new Order
                 {
-                    NumOfPizzas=numberOfPizzas,
+                    NumOfPizzas = numberOfPizzas,
                     ListOfPizzas = new List<Pizza>(numberOfPizzas)
                 };
                 while (counter <= numberOfPizzas)
                 {
-                    AnsiConsole.Render(new Markup($"[bold red]This is order number {counter} from your {numberOfPizzas} orders:[/] \n"));
+                    AnsiConsole.Render(new Markup($"[bold red] This is order number {counter} from your {numberOfPizzas} orders:[/] \n"));
                     //--API Call for the menu
-                    string components = await htppClient.GetStringAsync(baseUrl+"components");
+                    string components = await htppClient.GetStringAsync(baseUrl + "components");
                     var pizzaMenu = System.Text.Json.JsonSerializer.Deserialize<PizzaModel>(components);
                     TypeXPrice prefTop = null, prefSize = null, prefSide = null;
                     ConsoleFn(pizzaMenu, ref prefTop, ref prefSize, ref prefSide);
@@ -40,12 +41,12 @@ namespace PizzaApp
                     };
                     prefOrder.AddPizza(pizza);
                     //--API Call for order creation
-                    if(numberOfPizzas==counter)
+                    if (numberOfPizzas == counter)
                     {
                         var myContent = JsonConvert.SerializeObject(prefOrder);
                         var stringContent = new StringContent(myContent, Encoding.UTF8, "application/json");
-                        var response = await htppClient.PostAsync(baseUrl+"createPizza",stringContent);
-                        if(response.IsSuccessStatusCode)
+                        var response = await htppClient.PostAsync(baseUrl + "createPizza", stringContent);
+                        if (response.IsSuccessStatusCode)
                         {
                             AnsiConsole.Render(new Markup("[bold red] Order created successfully[/] \n"));
                         }
@@ -68,26 +69,26 @@ namespace PizzaApp
         }
         
         static void ConsoleFn(PizzaModel pizzaMenu, ref TypeXPrice prefTop, ref TypeXPrice prefSize, ref TypeXPrice prefSide)
-            {
-                string formatTitle = "[bold green]Available toppings[/] \n";
-                List<String> columnNames = new List<string> { "Toppings", "Prices" };
-                Menu.PrintMenu(formatTitle, columnNames, pizzaMenu.Toppings);
-                AnsiConsole.Render(new Markup("[bold yellow] Your preferred topping from the topping list:[/] \n"));
-                prefTop = Menu.InputCheck(pizzaMenu.Toppings, "topping");
-                formatTitle = "[bold green]Available sizes[/] \n";
-                columnNames.Clear();
-                columnNames.Add("Sizes");
-                columnNames.Add("Prices");
-                Menu.PrintMenu(formatTitle, columnNames, pizzaMenu.Sizes);
-                AnsiConsole.Render(new Markup("[bold yellow]Your preferred pizza size from the sizes list:[/]\n"));
-                prefSize = Menu.InputCheck(pizzaMenu.Sizes);
-                formatTitle = "[bold green]Available sides[/] \n";
-                columnNames.Clear();
-                columnNames.Add("Sides");
-                columnNames.Add("Prices");
-                Menu.PrintMenu(formatTitle, columnNames, pizzaMenu.Sides);
-                AnsiConsole.Render(new Markup("[bold yellow]Your preferred side from the sides list:[/]\n"));
-                prefSide = Menu.InputCheck(pizzaMenu.Sides, "side");
-            }
+        {
+            string formatTitle = "[bold green] Available toppings[/] \n";
+            List<String> columnNames = new List<string> { "Toppings", "Prices" };
+            Menu.PrintMenu(formatTitle, columnNames, pizzaMenu.Toppings);
+            AnsiConsole.Render(new Markup("[bold yellow] Your preferred topping from the topping list:[/] \n"));
+            prefTop = Menu.InputCheck(pizzaMenu.Toppings, "topping");
+            formatTitle = "[bold green] Available sizes[/] \n";
+            columnNames.Clear();
+            columnNames.Add("Sizes");
+            columnNames.Add("Prices");
+            Menu.PrintMenu(formatTitle, columnNames, pizzaMenu.Sizes);
+            AnsiConsole.Render(new Markup("[bold yellow] Your preferred pizza size from the sizes list:[/]\n"));
+            prefSize = Menu.InputCheck(pizzaMenu.Sizes);
+            formatTitle = "[bold green] Available sides[/] \n";
+            columnNames.Clear();
+            columnNames.Add("Sides");
+            columnNames.Add("Prices");
+            Menu.PrintMenu(formatTitle, columnNames, pizzaMenu.Sides);
+            AnsiConsole.Render(new Markup("[bold yellow] Your preferred side from the sides list:[/]\n"));
+            prefSide = Menu.InputCheck(pizzaMenu.Sides, "side");
+        }
     }
 }
