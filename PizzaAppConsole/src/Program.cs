@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IO;
+using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -17,6 +17,11 @@ namespace PizzaApp
             var htppClient = new HttpClient();
             int  numberOfPizzas = WelcomePage();
             int counter =1;
+            var prefOrder = new Order
+            {
+                NumOfPizzas=numberOfPizzas,
+                ListOfPizzas = new List<Pizza>(numberOfPizzas)
+            };
             while (counter <= numberOfPizzas)
             {
                 AnsiConsole.Render(new Markup($"[bold red]This is order number {counter} from your {numberOfPizzas} orders:[/] \n"));
@@ -25,15 +30,25 @@ namespace PizzaApp
                 var pizzaMenu = System.Text.Json.JsonSerializer.Deserialize<PizzaModel>(components);
                 TypeXPrice prefTop = null, prefSize = null, prefSide = null;
                 ConsoleFn(pizzaMenu, ref prefTop, ref prefSize, ref prefSide);
-                System.Console.WriteLine( $"Pref top is {prefTop} and size is {prefSize} and side is {prefSide}");
+                var pizza = new Pizza 
+                {
+                    Topping = prefTop,
+                    Size = prefSize,
+                    Side = prefSide
+                };
+                prefOrder.AddPizza(pizza);
                 //--API Call for order creation
-                // var formContent = new FormUrlEncodedContent(new[]
-                // {
-                //     new KeyValuePair<string, string>("comment", "aykalam"), 
-                //     new KeyValuePair<string, string>("questionId", "questionIdaykalam") 
-                // });
-                // var response = await htppClient.PostAsync($"{baseUrl} +createPizza",formContent);
-                counter++;
+                if(numberOfPizzas==counter)
+                {
+                    var myContent = JsonConvert.SerializeObject(prefOrder);
+                    var stringContent = new StringContent(myContent, Encoding.UTF8, "application/json");
+                    var response = await htppClient.PostAsync(baseUrl+"createPizza",stringContent);
+                    if(response.IsSuccessStatusCode)
+                    {
+                        AnsiConsole.Render(new Markup("[bold red] Order created successfully[/] \n"));
+                    }
+                    }
+                    counter++;
             }
         }
         static int WelcomePage()

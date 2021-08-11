@@ -19,3 +19,4 @@ D:\SliverKey\PlayGround\.NET\PizzaApp-Task2\PizzaAppAPI\obj\Debug\net6.0\PizzaAp
 D:\SliverKey\PlayGround\.NET\PizzaApp-Task2\PizzaAppAPI\obj\Debug\net6.0\ref\PizzaAppAPI.dll
 D:\SliverKey\PlayGround\.NET\PizzaApp-Task2\PizzaAppAPI\obj\Debug\net6.0\PizzaAppAPI.pdb
 D:\SliverKey\PlayGround\.NET\PizzaApp-Task2\PizzaAppAPI\obj\Debug\net6.0\PizzaAppAPI.genruntimeconfig.cache
+D:\SliverKey\PlayGround\.NET\PizzaApp-Task2\PizzaAppAPI\bin\Debug\net6.0\Files\orders.json
