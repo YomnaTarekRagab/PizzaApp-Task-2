@@ -19,18 +19,18 @@ app.MapGet("/components", async () =>
    return t1;
 });
 
-app.MapPost("/createPizza", async ([FromBody] Order recievedOrder) =>
+app.MapPost("/createPizza", async ([FromBody] Order receivedOrder) =>
 {
-    recievedOrder.OrderPrice();
+    receivedOrder.OrderPrice();
     string path = Path.Combine(Directory.GetCurrentDirectory(), "Files/orders.json");
     var options = new JsonSerializerOptions 
     { 
         WriteIndented = true,
         IncludeFields = true
     };
-    var orderJson = System.Text.Json.JsonSerializer.Serialize(recievedOrder, options);
+    var orderJson = System.Text.Json.JsonSerializer.Serialize(receivedOrder, options);
     await File.AppendAllTextAsync(path, orderJson);
-    return new OkObjectResult(recievedOrder);
+    return new OkObjectResult(receivedOrder);
 });
 
 static async Task<string> ReadOrdersList(string fileName)

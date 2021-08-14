@@ -32,7 +32,7 @@ namespace PizzaApp
                     string components = await htppClient.GetStringAsync(baseUrl + "components");
                     var pizzaMenu = System.Text.Json.JsonSerializer.Deserialize<PizzaModel>(components);
                     TypeXPrice prefTop = null, prefSize = null, prefSide = null;
-                    ConsoleFn(pizzaMenu, ref prefTop, ref prefSize, ref prefSide);
+                    (prefTop, prefSide, prefSize)=ConsoleFn(pizzaMenu);
                     var pizza = new Pizza 
                     {
                         Topping = prefTop,
@@ -68,8 +68,9 @@ namespace PizzaApp
             return n;
         }
         
-        static void ConsoleFn(PizzaModel pizzaMenu, ref TypeXPrice prefTop, ref TypeXPrice prefSize, ref TypeXPrice prefSide)
+        static (TypeXPrice,TypeXPrice,TypeXPrice) ConsoleFn(PizzaModel pizzaMenu)
         {
+            TypeXPrice prefTop = null, prefSize = null, prefSide = null;
             string formatTitle = "[bold green] Available toppings[/] \n";
             List<String> columnNames = new List<string> { "Toppings", "Prices" };
             Menu.PrintMenu(formatTitle, columnNames, pizzaMenu.Toppings);
@@ -89,6 +90,7 @@ namespace PizzaApp
             Menu.PrintMenu(formatTitle, columnNames, pizzaMenu.Sides);
             AnsiConsole.Render(new Markup("[bold yellow] Your preferred side from the sides list:[/]\n"));
             prefSide = Menu.InputCheck(pizzaMenu.Sides, "side");
+            return (prefTop, prefSize, prefSide);
         }
     }
 }
