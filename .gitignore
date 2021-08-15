@@ -1,7 +1,7 @@
-PizzaAppAPI/bin
-PizzaAppAPI/obj
-PizzaAppConsole/bin
-PizzaAppConsole/obj
+/PizzaAppAPI/bin
+/PizzaAppAPI/obj
+/PizzaAppConsole/bin
+/PizzaAppConsole/obj
 *.dll
 *.dll
 *.pdb
